@@ -7,8 +7,13 @@
 using namespace std;
 
 class Student{
+    private:
+        char* firstName;
+        char* lastName;
+        float gpa;
+        int studentID;
     public:
-        Student();
+        Student(char* newFirstName, char* newLastName, float newGpa, int newStudentID);
         ~Student();
 };
 #endif
