@@ -23,10 +23,15 @@ int main(){
         if(strcmp(input, "ADD")==0){
             cout << "Creating a student..." << endl;
             cout << "Enter the first name of the student" << endl;
+            cin.getline(fName, 20);
             cout << "Enter the last name of the student" << endl;
+            cin.getline(lName, 20);
             cout << "Enter the student's ID" << endl;
+            cin >> studentID;
+            cin.get();
             cout << "Enter the student's GPA" << endl;
-
+            cin >> gpa;
+            cin.get();
             if(head == NULL){
                 Student* temp = new Student(fName, lName, gpa, studentID);
                 head = new Node(temp);    
