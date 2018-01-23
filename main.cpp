@@ -35,15 +35,25 @@ int main(){
             if(head == NULL){
                 Student* temp = new Student(fName, lName, gpa, studentID);
                 head = new Node(temp);    
-            } 
+            }else{
+                
+            }
+
         }else if(strcmp(input, "PRINT")==0){
-            
+            cout << (head->getContent())->getGpa();
+            /*
+            cout << (head->getContent())->getFName()  << " " << (head->getContent())->getLName() << ", "<< (head->getContent())->getID() << ", " << (head->getContent())->getGpa() << endl;
+            */
+            /*while(){
+                
+            }
+            */
         }else if(strcmp(input, "DELETE")==0){
             
         }else if(strcmp(input, "QUIT")==0){
             break;
         }else if(strcmp(input, "AVERAGE")==0){
-            
+                
         }
     }
 }

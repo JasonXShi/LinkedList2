@@ -14,6 +14,10 @@ class Student{
         int studentID;
     public:
         Student(char* newFirstName, char* newLastName, float newGpa, int newStudentID);
+        char* getLName();
+        char* getFName();
+        float getGpa();
+        int getID();
         ~Student();
 };
 #endif
