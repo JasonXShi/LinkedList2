@@ -25,7 +25,7 @@ void average(Node* curr){
     }
     cout << totalGpa/stuNum;
 }
-void add(){
+void add(Student* temp){
 
 }
 int main(){
@@ -55,15 +55,18 @@ int main(){
             cout << "Enter the student's GPA" << endl;
             cin >> gpa;
             cin.get();
+            Student* temp = new Student(fName, lName, gpa, studentID);
+            add(temp);/*
             if(head == NULL){
-                Student* temp = new Student(fName, lName, gpa, studentID);
                 head = new Node(temp);    
             }else{
                 
             }
+            */
 
         }else if(strcmp(input, "PRINT")==0){
-            cout << (head->getContent())->getGpa();
+            print(head);
+            //cout << (head->getContent())->getGpa();
             /*
             cout << (head->getContent())->getFName()  << " " << (head->getContent())->getLName() << ", "<< (head->getContent())->getID() << ", " << (head->getContent())->getGpa() << endl;
             */
@@ -76,7 +79,7 @@ int main(){
         }else if(strcmp(input, "QUIT")==0){
             break;
         }else if(strcmp(input, "AVERAGE")==0){
-                
+              average(head);  
         }
     }
 }
