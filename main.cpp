@@ -5,6 +5,29 @@
 #include <cstdlib>
 using namespace std;
 
+
+void print(Node* curr){
+    if(curr != NULL){
+        cout << (head->getContent())->getFName()  << " " << (head->getContent())->getLName() << ", "<< (head->getContent())->getID() << ", " << (head->getContent())->getGpa() << endl;
+        print(curr->getNext());
+    }
+}
+void deleteStudent(Node* ){
+    
+}
+void average(Node* curr){
+    float stuNum;
+    float totalGpa;
+    while(curr != NULL){
+        stuNum++;
+        totalGpa += (curr->getContent())->getGpa;
+        curr = curr.getNext();
+    }
+    cout << totalGpa/stuNum;
+}
+void add(){
+
+}
 int main(){
     Node *head, *tail;
     char input[40];
