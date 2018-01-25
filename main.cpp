@@ -1,3 +1,7 @@
+/*Second part of Linked List
+ *Allows user to edit a list of students
+ *Written by Jason Shi and the Node Class by Connor Shu
+ */
 #include "Student.h"
 #include "Node.h"
 #include <cstring>
@@ -12,7 +16,7 @@ void print(Node* curr){
         print(curr->getNext());
     }
 }
-void deleteStudent(Node* ){
+void deleteStudent(Node* &head, int ID){
     
 }
 void average(Node* curr){
@@ -23,17 +27,21 @@ void average(Node* curr){
         totalGpa = ((curr->getContent())->getGpa()) + totalGpa;
         curr = curr->getNext();
     }
-    cout << totalGpa/stuNum;
+    cout << "The average GPA is: "<<totalGpa/stuNum<< endl;
 }
 void add(Student* temp, Node* &curr){
+    //if the current node isn't null
     if(curr!=NULL){
-        Node* nextNode = curr->getNext();
+        //next node = the next one from curr
         if(curr->getNext()!=NULL){
+            //if the next one isn't null, and it is between the next and current
             if(curr->getContent()->getID() < temp->getID() && curr->getNext()->getContent()->getID() > temp->getID()){
-                Node* tempNode = curr->getNext();
-                curr->setNext(new Node(temp));
-                nextNode = curr->getNext();
-                nextNode->setNext(tempNode);
+                Node* nextNode = curr->getNext();
+                Node* tempNode = new Node(temp);
+                //set the new node to next of curr
+                curr->setNext(tempNode);
+                nextNode->setPrevious(tempNode);
+                //set the next node to the curr
                 return;
             }else if(curr->getContent()->getID() > temp->getID()){
                 //set head to the thing and move everything
@@ -64,8 +72,8 @@ int main(){
     while(1){
         cout << "Enter a command:"<<endl;
         cin.getline(input, 40);
-        char fName[20];
-        char lName[20];
+        char *fName = new char[20];
+        char *lName = new char[20];
         int studentID;
         float gpa;
         if(strcmp(input, "ADD")==0){
@@ -81,29 +89,15 @@ int main(){
             cin >> gpa;
             cin.get();
             cout << fName << " " << lName;
-
             Student* temp = new Student(fName, lName, gpa, studentID);
-            cout << "made temp";
-            add(temp, head);/*
-            if(head == NULL){
-                head = new Node(temp);    
-            }else{
-                
-            }
-            */
-
+            add(temp, head);
         }else if(strcmp(input, "PRINT")==0){
             print(head);
-            //cout << (head->getContent())->getGpa();
-            /*
-            cout << (head->getContent())->getFName()  << " " << (head->getContent())->getLName() << ", "<< (head->getContent())->getID() << ", " << (head->getContent())->getGpa() << endl;
-            */
-            /*while(){
-                
-            }
-            */
         }else if(strcmp(input, "DELETE")==0){
-            
+            cout << "Enter the student ID you want to delete: ";
+            cin >> studentID;
+            cin.get();
+            //delete(head, studentID);
         }else if(strcmp(input, "QUIT")==0){
             break;
         }else if(strcmp(input, "AVERAGE")==0){
