@@ -8,7 +8,7 @@ using namespace std;
 
 void print(Node* curr){
     if(curr != NULL){
-        cout << (head->getContent())->getFName()  << " " << (head->getContent())->getLName() << ", "<< (head->getContent())->getID() << ", " << (head->getContent())->getGpa() << endl;
+        cout << (curr->getContent())->getFName()  << " " << (curr->getContent())->getLName() << ", "<< (curr->getContent())->getID() << ", " << (curr->getContent())->getGpa() << endl;
         print(curr->getNext());
     }
 }
@@ -20,16 +20,41 @@ void average(Node* curr){
     float totalGpa;
     while(curr != NULL){
         stuNum++;
-        totalGpa += (curr->getContent())->getGpa;
-        curr = curr.getNext();
+        totalGpa = ((curr->getContent())->getGpa()) + totalGpa;
+        curr = curr->getNext();
     }
     cout << totalGpa/stuNum;
 }
-void add(Student* temp){
-
+void add(Student* temp, Node* &curr){
+    if(curr!=NULL){
+        Node* nextNode = curr->getNext();
+        if(curr->getNext()!=NULL){
+            if(curr->getContent()->getID() < temp->getID() && curr->getNext()->getContent()->getID() > temp->getID()){
+                Node* tempNode = curr->getNext();
+                curr->setNext(new Node(temp));
+                nextNode = curr->getNext();
+                nextNode->setNext(tempNode);
+                return;
+            }else if(curr->getContent()->getID() > temp->getID()){
+                //set head to the thing and move everything
+                return;   
+            }
+        }else{
+            curr->setNext(new Node(temp));
+            return;
+        }
+    }else{
+        curr = new Node(temp);
+        return;
+    }
+    Node* nextNode = curr->getNext();
+    add(temp, nextNode);    
 }
+
 int main(){
     Node *head, *tail;
+    head = NULL;
+    tail = NULL;
     char input[40];
     cout<< "Type 'ADD' to add a student." << endl;
     cout << "Type 'PRINT' to print all stored students." << endl;
@@ -55,8 +80,11 @@ int main(){
             cout << "Enter the student's GPA" << endl;
             cin >> gpa;
             cin.get();
+            cout << fName << " " << lName;
+
             Student* temp = new Student(fName, lName, gpa, studentID);
-            add(temp);/*
+            cout << "made temp";
+            add(temp, head);/*
             if(head == NULL){
                 head = new Node(temp);    
             }else{
@@ -79,7 +107,7 @@ int main(){
         }else if(strcmp(input, "QUIT")==0){
             break;
         }else if(strcmp(input, "AVERAGE")==0){
-              average(head);  
+            average(head);  
         }
     }
 }
