@@ -17,7 +17,12 @@ void print(Node* curr){
     }
 }
 void deleteStudent(Node* &head, int ID){
-    
+    node *current = head;
+    node *prev = NULL;
+    while(current != NULL){
+        
+        current = current->getNext();
+    }
 }
 void average(Node* curr){
     float stuNum;
@@ -97,7 +102,7 @@ int main(){
             cout << "Enter the student ID you want to delete: ";
             cin >> studentID;
             cin.get();
-            //delete(head, studentID);
+            delete(head, studentID);
         }else if(strcmp(input, "QUIT")==0){
             break;
         }else if(strcmp(input, "AVERAGE")==0){
