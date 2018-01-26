@@ -22,6 +22,10 @@ void deleteStudent(Node* &head, int ID){
     while(current != NULL){
         
         current = current->getNext();
+        delete(current);
+        return;
+        previous = current;
+        current = current->getNext(); 
     }
 }
 void average(Node* curr){
