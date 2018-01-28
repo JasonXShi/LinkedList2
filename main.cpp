@@ -17,15 +17,28 @@ void print(Node* curr){
     }
 }
 void deleteStudent(Node* &head, int ID){
-    node *current = head;
-    node *prev = NULL;
+    Node *current = head;
+    Node *prev = NULL;
     while(current != NULL){
-        
+        if((current->getContent())->getID == ID){
+            if(current->getPrevious()!=NULL{
+                if(current->getNext()!=NULL){
+                    // set current->last->setnext to current -> next and current -> next _>setlast to current->last
+                    current->getPrevious()->setNext() = current->getNext();
+                    current->getNext()->setLast() = current->getLast();
+                }else{
+                    //dont set current->next to current prev
+                    current->getPrevious()->setNext() = current->getNext();
+                    current->getNext()->setLast() = NULL;
+                }
+                delete(*current);
+            }else{
+                //set head to next node and delete current
+                head = current->getNext();
+                delete(*current);
+            }
+        }
         current = current->getNext();
-        delete(current);
-        return;
-        previous = current;
-        current = current->getNext(); 
     }
 }
 void average(Node* curr){
