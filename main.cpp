@@ -9,19 +9,25 @@
 #include <cstdlib>
 using namespace std;
 
-
+//input the head and recursively go through everything
 void print(Node* curr){
     if(curr != NULL){
+        //print out the first node
         cout << (curr->getContent())->getFName()  << " " << (curr->getContent())->getLName() << ", "<< (curr->getContent())->getID() << ", " << (curr->getContent())->getGpa() << endl;
+        //call it recursively 
         print(curr->getNext());
     }
 }
 void deleteStudent(Node* &head, int ID){
+    //make a couple node pointers
     Node *current = head;
     Node *prev = NULL;
+    //if current isn't null
     while(current != NULL){
+        //check if id matches
         if((current->getContent())->getID == ID){
-            if(current->getPrevious()!=NULL{
+            //if this isn't head
+            if(current!=head{
                 if(current->getNext()!=NULL){
                     // set current->last->setnext to current -> next and current -> next _>setlast to current->last
                     current->getPrevious()->setNext() = current->getNext();
@@ -31,24 +37,29 @@ void deleteStudent(Node* &head, int ID){
                     current->getPrevious()->setNext() = current->getNext();
                     current->getNext()->setLast() = NULL;
                 }
+                //delete 
                 delete(*current);
             }else{
-                //set head to next node and delete current
+                //if the identified one is head then set the next node to head and delete the old head
                 head = current->getNext();
                 delete(*current);
             }
         }
+               //iterate through all
         current = current->getNext();
     }
 }
 void average(Node* curr){
+    //make variables
     float stuNum;
     float totalGpa;
+    //iterate through everything and add up gpa and num of students
     while(curr != NULL){
         stuNum++;
         totalGpa = ((curr->getContent())->getGpa()) + totalGpa;
         curr = curr->getNext();
     }
+    //print out average
     cout << "The average GPA is: "<<totalGpa/stuNum<< endl;
 }
 void add(Student* temp, Node* &curr){
@@ -66,7 +77,7 @@ void add(Student* temp, Node* &curr){
                 //set the next node to the curr
                 return;
             }else if(curr->getContent()->getID() > temp->getID()){
-                //set head to the thing and move everything
+                //set head to the new one. set next to the old head
                 return;   
             }
         }else{
