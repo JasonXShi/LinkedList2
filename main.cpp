@@ -23,31 +23,35 @@ void deleteStudent(Node* &head, int ID){
     Node *current = head;
     Node *prev = NULL;
     //if current isn't null
-    while(current != NULL){
+    
         //check if id matches
-        if((current->getContent())->getID == ID){
+        if(((current->getContent())->getID()) == ID){
+            cout << "id matches" << endl;
             //if this isn't head
-            if(current!=head{
+            if(current!=head){
                 if(current->getNext()!=NULL){
                     // set current->last->setnext to current -> next and current -> next _>setlast to current->last
-                    current->getPrevious()->setNext() = current->getNext();
-                    current->getNext()->setLast() = current->getLast();
+                    (current->getPrevious())->setNext(current->getNext());// = current->getNext();
+                    (current->getNext())->setPrevious(current->getPrevious());// current->getLast();
                 }else{
                     //dont set current->next to current prev
-                    current->getPrevious()->setNext() = current->getNext();
-                    current->getNext()->setLast() = NULL;
+                    //(current->getPrevious())->setNext(current->getNext());// = current->getNext();
+                    
                 }
                 //delete 
-                delete(*current);
+                delete(current);
             }else{
                 //if the identified one is head then set the next node to head and delete the old head
-                head = current->getNext();
-                delete(*current);
+                
+                if(current->getNext()!=NULL){
+                    head = current->getNext();
+                }
+                delete(current);
             }
         }
                //iterate through all
         current = current->getNext();
-    }
+        deleteStudent(current, ID);
 }
 void average(Node* curr){
     //make variables
@@ -121,7 +125,6 @@ int main(){
             cout << "Enter the student's GPA" << endl;
             cin >> gpa;
             cin.get();
-            cout << fName << " " << lName;
             Student* temp = new Student(fName, lName, gpa, studentID);
             add(temp, head);
         }else if(strcmp(input, "PRINT")==0){
@@ -130,7 +133,7 @@ int main(){
             cout << "Enter the student ID you want to delete: ";
             cin >> studentID;
             cin.get();
-            delete(head, studentID);
+            deleteStudent(head, studentID);
         }else if(strcmp(input, "QUIT")==0){
             break;
         }else if(strcmp(input, "AVERAGE")==0){
