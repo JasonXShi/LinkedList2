@@ -18,40 +18,53 @@ void print(Node* curr){
         print(curr->getNext());
     }
 }
-void deleteStudent(Node* &head, int ID){
+void deleteStudent(Node* &head, Node* current, int ID){
     //make a couple node pointers
-    Node *current = head;
-    Node *prev = NULL;
     //if current isn't null
-    
+     
         //check if id matches
         if(((current->getContent())->getID()) == ID){
             cout << "id matches" << endl;
             //if this isn't head
-            if(current!=head){
+            cout << "head: " << (head->getContent())->getID() << endl;
+            cout << "current: " << (current->getContent())->getID()<<endl;
+            if((current->getContent())->getID() != (head->getContent())->getID()){
+                cout << "not head" << endl;
                 if(current->getNext()!=NULL){
+                    cout << "next not null" << endl;
                     // set current->last->setnext to current -> next and current -> next _>setlast to current->last
-                    (current->getPrevious())->setNext(current->getNext());// = current->getNext();
-                    (current->getNext())->setPrevious(current->getPrevious());// current->getLast();
+                    //(current->getPrevious())->setNext(current->getNext());
+                    (current->getNext())->setPrevious(current->getPrevious());
+                    //cout << current->getPrevious()->getContent()->getID() << endl;
+                    cout << current->getNext()->getContent()->getID() << endl;
                 }else{
+                    cout << "next is null" <<endl;
                     //dont set current->next to current prev
-                    //(current->getPrevious())->setNext(current->getNext());// = current->getNext();
+                    //(current->getPrevious())->setNext(NULL);// = current->getNext();
                     
                 }
                 //delete 
                 delete(current);
+                return;
             }else{
                 //if the identified one is head then set the next node to head and delete the old head
-                
+                cout << "is head" << endl;
                 if(current->getNext()!=NULL){
+                    cout << "next not null" << endl;
                     head = current->getNext();
+                }else{
+                    cout << "next null" << endl;
+                    head = NULL;
                 }
-                delete(current);
+            delete(current);
+            return;
             }
         }
                //iterate through all
-        current = current->getNext();
-        deleteStudent(current, ID);
+        if(current->getNext() != NULL){
+            current = current->getNext();
+        }
+        deleteStudent(head, current, ID);
 }
 void average(Node* curr){
     //make variables
@@ -130,10 +143,10 @@ int main(){
         }else if(strcmp(input, "PRINT")==0){
             print(head);
         }else if(strcmp(input, "DELETE")==0){
-            cout << "Enter the student ID you want to delete: ";
+            cout << "Enter the student ID you want to delete: "<< endl;
             cin >> studentID;
             cin.get();
-            deleteStudent(head, studentID);
+            deleteStudent(head, head, studentID);
         }else if(strcmp(input, "QUIT")==0){
             break;
         }else if(strcmp(input, "AVERAGE")==0){
